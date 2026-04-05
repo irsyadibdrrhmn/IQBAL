@@ -1,0 +1,18 @@
+{
+  "framework": "Laravel",
+  "document-root": "public",
+  "composer-vendor-dir": "vendor",
+  "composer-command": "install --no-dev --optimize-autoloader",
+  "nginx": {
+    "version": "latest",
+    "document_root": "public",
+    "app.conf": {
+      "index": ["index.html", "index.php"],
+      "error_page": "index.php"
+    }
+  },
+  "php": {
+    "version": "8.3",
+    "extensions": ["pdo", "pdo_mysql", "pdo_sqlite", "bcmath"]
+  }
+}
