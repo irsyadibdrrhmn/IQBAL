@@ -23,8 +23,16 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
-   
+    public function index()
+    {
+        $categories = Category::all();
+        $featuredProduct = Discount::where('status', 'active')
+            ->with('product')
+            ->get()
+            ->pluck('product');
+        
+        return view('home.index', compact('categories', 'featuredProduct'));
+    }
 
     public function checkout()
     {
