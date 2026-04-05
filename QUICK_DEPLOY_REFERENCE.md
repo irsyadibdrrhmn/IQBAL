@@ -29,17 +29,13 @@ APP_DEBUG=false
 APP_KEY=base64:5G8IFgeOeqPwN8IGgGMb7sd/lHC5lyqX1hR+8lcgY78=
 APP_URL=https://your-railway-domain.com
 
-DB_CONNECTION=mysql
-DB_HOST=<your-railway-mysql-host>
-DB_PORT=3306
-DB_DATABASE=<database_name>
-DB_USERNAME=<database_user>
-DB_PASSWORD=<database_password>
+DB_CONNECTION=sqlite
+FILESYSTEM_DISK=local
+CACHE_DRIVER=database
+SESSION_DRIVER=database
 
-SESSION_DRIVER=file
-CACHE_DRIVER=file
-QUEUE_DRIVER=sync
-LOG_CHANNEL=stderr
+LOG_CHANNEL=stack
+LOG_LEVEL=debug
 
 MAIL_MAILER=log
 MAIL_FROM_ADDRESS=noreply@example.com
@@ -48,14 +44,21 @@ RAJAONGKIR_API_KEY=<your_api_key>
 RAJAONGKIR_BASE_URL=https://api.rajaongkir.com/starter
 ```
 
+## Custom Build Command
+
+In Railway → Project Settings → Custom Build command, set:
+
+```bash
+composer install --no-dev --optimize-autoloader && php artisan config:clear && php artisan config:cache && php artisan migrate --force && php artisan storage:link
+```
+
 ## Deployment
 
 1. Connect your GitHub repo to Railway
-2. Add all environment variables (see above)
-3. Railway automatically detects `Procfile` and deploys
-4. Wait for build to complete
-
-## Post-Deployment
+2. Add all environment variables (see "Railway Environment Variables" section)
+3. Set the custom build command (see "Custom Build Command" section)
+4. Railway automatically detects `Procfile` and starts your app
+5. Wait for build and deployment to complete
 
 ```bash
 # Check status

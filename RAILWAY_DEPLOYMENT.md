@@ -54,39 +54,40 @@ MAIL_FROM_ADDRESS=noreply@example.com
 
 ### Procfile for Railway
 
-Create a `Procfile` in the root directory:
+The `Procfile` is already configured to work with Railway:
 
 ```
-web: vendor/bin/heroku-php-apache2 public/
+web: php artisan serve --host=0.0.0.0 --port=$PORT
 ```
 
-Or if using Nginx, use Railway's built-in PHP support.
+This uses Laravel's built-in development server which works perfectly on Railway.
+
+Alternatively, if you want to use Docker, Railway will automatically detect the `Dockerfile` and build from it.
 
 ### Build Steps (Railway config)
 
 In your Railway project settings, set up the build command:
 
 ```bash
-composer install --no-interaction --prefer-dist --optimize-autoloader
-php artisan cache:clear
-php artisan config:cache
-php artisan route:cache
-php artisan view:clear
+composer install --no-dev --optimize-autoloader && php artisan config:clear && php artisan config:cache && php artisan migrate --force && php artisan storage:link
 ```
 
-Note: **Do NOT use** `php artisan view:cache` as it may fail if all components aren't properly resolved. Views will still be optimized.
+**What each step does:**
+
+- `composer install --no-dev --optimize-autoloader` - Install dependencies optimized for production
+- `php artisan config:cache` - Cache configuration for faster boot
+- `php artisan migrate --force` - Run pending migrations automatically
+- `php artisan storage:link` - Create public/storage symlink (handled gracefully in AppServiceProvider)
 
 ### Start Command
+
+The `Procfile` already handles this:
 
 ```bash
 php artisan serve --host=0.0.0.0 --port=$PORT
 ```
 
-Or for production-ready setup:
-
-```bash
-php artisan migrate --force && vendor/bin/heroku-php-apache2 public/
-```
+Railway automatically reads the `Procfile` and uses this command. No additional configuration needed.
 
 ## Common Deployment Issues and Solutions
 
