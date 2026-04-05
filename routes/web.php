@@ -29,7 +29,7 @@ Route::get('/register', [AuthController::class, 'showRegister'])->name('register
 Route::post('/register', [AuthController::class, 'register'])->name('register.action');
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login.form');
 Route::post('/login', [AuthController::class, 'login'])->name('login.action');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout.custom');
 Route::resource('users', AuthController::class);
 Route::get('/admin/users', [AuthController::class, 'index'])->name('admin.users.index');
 
@@ -68,13 +68,6 @@ Route::get('/product/data', [ProductController::class, 'showProductData'])->name
 
 // ======================== CATEGORIES ========================
 Route::resource('categories', CategoryController::class);
-Route::get('/categories.index', [CategoryController::class, 'index'])->name('categories.index');
-Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
-Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
-Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
-Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
-Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
-Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 
 // ======================== DISCOUNTS ========================
 Route::resource('discounts', DiscountController::class);
@@ -90,7 +83,6 @@ Route::resource('banners', BannerController::class);
 
 // ======================== ORDERS ========================
 Route::resource('orders', OrderController::class);
-Route::get('/orders/{id}', [OrderController::class, 'show'])->name('orders.show');
 Route::put('/orders/update-resi/{order}', [OrderController::class, 'updateResi'])->name('orders.updateResi');
 Route::post('/orders/{id}/cancel', [OrderController::class, 'cancel'])->name('orders.cancel');
 Route::put('/orders/{order}/update-status', [OrderController::class, 'updateStatus'])->name('orders.updateStatus');
@@ -108,7 +100,6 @@ Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.in
 Route::post('/checkout', [CheckoutController::class, 'process'])->name('checkout.process');
 Route::post('/checkout/selected', [CheckoutController::class, 'selected'])->name('checkout.selected');
 Route::get('/chekout', [CheckoutController::class, 'index'])->name('chekout.index');
-Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');
 Route::get('/ongkir', [CheckoutController::class, 'ongkir_index'])->name('ongkir.index');
 Route::post('/cek-ongkir', [CheckoutController::class, 'cekOngkir'])->name('cek-ongkir');
 Route::post('save-ongkir', [CheckoutController::class, 'saveOngkir'])->name('save-ongkir');
@@ -121,7 +112,6 @@ Route::post('/ongkir/set-session', [CheckoutController::class, 'setSession'])->n
     Route::put('/cart/{id}', [CartController::class, 'update'])->name('cart.update');
     Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
 
-Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
 Route::delete('/cart/delete', [CartController::class, 'destroy'])->name('cart.delete');
 Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
 
