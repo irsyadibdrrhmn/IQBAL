@@ -5,94 +5,154 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', 'Laravel') }} - E-Commerce</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-        <!-- Styles -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <!-- Bootstrap CSS for styling -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
         <style>
             body {
                 font-family: 'Figtree', sans-serif;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+            }
+            .welcome-container {
+                background: white;
+                border-radius: 10px;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+                padding: 60px 40px;
+            }
+            .welcome-header {
+                text-align: center;
+                margin-bottom: 40px;
+            }
+            .welcome-header h1 {
+                color: #333;
+                font-weight: 700;
+                margin-bottom: 10px;
+            }
+            .welcome-header p {
+                color: #666;
+                font-size: 18px;
+            }
+            .feature-box {
+                text-align: center;
+                padding: 30px;
+                margin-bottom: 20px;
+            }
+            .feature-icon {
+                font-size: 48px;
+                margin-bottom: 15px;
+            }
+            .btn-custom {
+                padding: 12px 30px;
+                font-size: 16px;
+                margin: 10px;
+                border-radius: 5px;
+            }
+            .btn-login {
+                background-color: #667eea;
+                color: white;
+            }
+            .btn-login:hover {
+                background-color: #5568d3;
+                color: white;
+            }
+            .btn-register {
+                background-color: #764ba2;
+                color: white;
+            }
+            .btn-register:hover {
+                background-color: #62398f;
+                color: white;
+            }
+            .auth-links {
+                text-align: right;
+                margin-bottom: 20px;
             }
         </style>
     </head>
-    <body class="antialiased">
-        <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100">
+    <body>
+        <div class="container">
             @if (Route::has('login'))
-                <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
+                <div class="auth-links">
                     @auth
-                        <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 underline">
-                            Dashboard
-                        </a>
+                        <a href="{{ url('/dashboard') }}" class="btn btn-sm btn-custom btn-login">Dashboard</a>
                     @else
-                        <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 underline">
-                            Log in
-                        </a>
-
+                        <a href="{{ route('login') }}" class="btn btn-sm btn-custom btn-login">Log in</a>
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 underline">
-                                Register
-                            </a>
+                            <a href="{{ route('register') }}" class="btn btn-sm btn-custom btn-register">Register</a>
                         @endif
                     @endauth
                 </div>
             @endif
 
-            <div class="max-w-7xl mx-auto p-6 lg:p-8">
-                <div class="flex justify-center">
-                    <h1 class="text-6xl font-bold text-gray-800 text-center mb-4">
-                        {{ config('app.name', 'IQBAL') }} E-Commerce
-                    </h1>
+            <div class="welcome-container">
+                <div class="welcome-header">
+                    <h1>🛍️ {{ config('app.name', 'IQBAL') }} E-Commerce</h1>
+                    <p>Welcome to your shopping destination</p>
                 </div>
 
-                <div class="mt-16">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-                        <div class="flex items-start gap-4 rounded-lg p-6 bg-white shadow">
-                            <div class="flex-shrink-0">
-                                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white">
-                                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <div>
-                                <h3 class="text-lg font-medium text-gray-900">Welcome to IQBAL</h3>
-                                <p class="mt-2 text-gray-500">Your e-commerce platform is ready to use. Browse our products and enjoy shopping!</p>
-                            </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="feature-box">
+                            <div class="feature-icon">⚡</div>
+                            <h3>Fast & Reliable</h3>
+                            <p>Shop with confidence on our fast and secure platform</p>
                         </div>
-
-                        <div class="flex items-start gap-4 rounded-lg p-6 bg-white shadow">
-                            <div class="flex-shrink-0">
-                                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-green-500 text-white">
-                                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <div>
-                                <h3 class="text-lg font-medium text-gray-900">Get Started</h3>
-                                <p class="mt-2 text-gray-500">
-                                    @auth
-                                        Visit your <a href="{{ url('/dashboard') }}" class="text-blue-600 hover:text-blue-800">dashboard</a> to manage your account.
-                                    @else
-                                        <a href="{{ route('login') }}" class="text-blue-600 hover:text-blue-800">Log in</a> or <a href="{{ route('register') }}" class="text-blue-600 hover:text-blue-800">register</a> to get started.
-                                    @endauth
-                                </p>
-                            </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="feature-box">
+                            <div class="feature-icon">🔒</div>
+                            <h3>Secure Checkout</h3>
+                            <p>Your data is encrypted and protected at all times</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="mt-16 text-center">
-                    <p class="text-gray-600">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="feature-box">
+                            <div class="feature-icon">📦</div>
+                            <h3>Fast Shipping</h3>
+                            <p>Get your orders delivered quickly to your doorstep</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="feature-box">
+                            <div class="feature-icon">💬</div>
+                            <h3>Support</h3>
+                            <p>Our customer service team is here to help you</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 40px;">
+                    @auth
+                        <p>Ready to shop? <a href="{{ url('/dashboard') }}" class="btn btn-custom btn-login">Go to Dashboard</a></p>
+                    @else
+                        <p>
+                            <a href="{{ route('register') }}" class="btn btn-custom btn-register">Create Account</a>
+                            <a href="{{ route('login') }}" class="btn btn-custom btn-login">Sign In</a>
+                        </p>
+                    @endauth
+                </div>
+
+                <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
+                    <p style="color: #999; font-size: 14px;">
                         {{ config('app.name', 'IQBAL') }} © {{ date('Y') }}. All rights reserved.
                     </p>
                 </div>
             </div>
         </div>
+
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>
