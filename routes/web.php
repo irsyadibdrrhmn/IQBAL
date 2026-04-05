@@ -30,7 +30,6 @@ Route::post('/register', [AuthController::class, 'register'])->name('register.ac
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login.form');
 Route::post('/login', [AuthController::class, 'login'])->name('login.action');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-Route::get('logout', [UserController::class, 'logout'])->name('logout');
 Route::resource('users', AuthController::class);
 Route::get('/admin/users', [AuthController::class, 'index'])->name('admin.users.index');
 
